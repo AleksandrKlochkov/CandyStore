@@ -1,0 +1,46 @@
+﻿@model Store.Models.EditModel
+@using Microsoft.AspNet.Identity
+
+@{
+                /**/
+
+                ViewBag.Title = "Изменение данных пользователя";
+                Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать данные профиля</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        <div style="float:right"><a href="/Account/Delete/?userid=@ViewBag.Userid">Удалить пользователя</a></div>
+        @Html.ValidationSummary(true, "")
+        <div>
+            Назначить: <a href="/Account/AddRole?userid=@ViewBag.UserId&role=admin">Администратором</a> |
+            <a href="/Account/AddRole?userid=@ViewBag.UserId&role=user">Пользователем</a>
+            <p>
+                Роль: @ViewBag.Role
+            </p>
+        </div>
+        <div>
+            <p>Имя: @Html.EditorFor(model => model.LastName)</p>
+        </div>
+        <div>
+            <p>Фамилия: @Html.EditorFor(model => model.FirstName)</p>
+        </div>
+        <div>
+            <p>Почтовый индекс: @Html.EditorFor(model => model.PostalCode)</p>
+        </div>
+        <div>
+            <p>Адрес: @Html.EditorFor(model => model.Address)</p>
+        </div>
+         
+        <div>
+            <div>
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+}

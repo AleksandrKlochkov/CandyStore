@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Store.Models.Product>
+@using Microsoft.AspNet.Identity
+
+
+@{
+    ViewBag.Title = "Главная Storev Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.HeaderText</h2>
+
+@foreach (var p in Model)
+{
+    <div class="product_box">
+        <h3>
+            @p.Category.CategoryName @p.Model
+        </h3>
+        <img src="@p.PictureURL" />
+
+        <p class="product_price">@Html.DisplayFor(model => p.Price) ₱</p>
+
+        <a href='@Url.Action("Add", "Basket", new { id = p.Id, userid = User.Identity.GetUserId() })' class="addtocart">В корзину</a>
+        <a href='@Url.Action("Detail", "Product", new { id = p.Id })' class="detail">Подробнее</a>
+
+    </div>
+}

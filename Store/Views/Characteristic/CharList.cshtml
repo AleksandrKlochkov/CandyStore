@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Store.Models.Characteristic>
+
+@{
+    ViewBag.Title = "Список характеристик";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список характеристик</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Add")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Характеристика
+        </th>
+        <th>
+            Единица измерения
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CharacName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Unit)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

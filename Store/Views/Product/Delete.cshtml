@@ -1,0 +1,90 @@
+﻿@model Store.Models.Product
+
+@{
+    ViewBag.Title = "Удаление";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление товара</h2>
+
+<h3>Вы уверены что хотите удалить товар?</h3>
+<div>
+    <h4>Товар</h4>
+    <hr />
+    <img width="200" src="@Model.PictureURL" />
+    <dl class="dl-horizontal">
+        <dt>
+            Категория
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+
+        <dt>
+            Брэнд
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand.BrandName)
+        </dd>
+
+        <dt>
+            Серия
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Series)
+        </dd>
+
+        <dt>
+            Модель
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            Стоимость
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            Дата добавления
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+        <dt>
+            Осталось
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Left)
+        </dd>
+
+        <dt>
+            Описание
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+        </div>
+    }
+</div>

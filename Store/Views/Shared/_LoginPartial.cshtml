@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    <div id="header_right">
+        <p>
+            <a href="#">Вы вошли как: @User.Identity.GetUserName()  </a> | <a href="/account/edit">Мой аккаунт</a> | <a href="/Account/Logout">Выйти</a>
+        </p>
+        <p>
+            <a href='@Url.Action("Basket", "Basket", new { userid = User.Identity.GetUserId() })'>Показать корзину</a>
+        </p>
+    </div>
+    <div class="cleaner"></div>
+}
+else
+{
+    <div id="header_right">
+        <p>
+            <a href="/account/edit">Мой аккаунт</a> |  <a href="/Account/Login">Вход</a>
+        </p>
+        <p>
+            <a href='@Url.Action("Login", "Account")'>Показать корзину</a>
+        </p>
+    </div>
+    <div class="cleaner"></div>
+}

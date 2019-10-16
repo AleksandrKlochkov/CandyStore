@@ -1,0 +1,47 @@
+﻿@model Store.Models.EditModel
+
+@{
+    ViewBag.Title = "Изменение данных пользователя";
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать данные профиля</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        <div>
+            <p>
+                Ваша роль: @if (User.IsInRole("admin"))
+                {
+                    <strong>Администратор</strong>
+                }
+                else
+                {
+                    <strong>Пользователь</strong>
+                }
+            </p>
+        </div>
+        <div>
+            <p>Имя: @Html.EditorFor(model => model.LastName)</p>
+        </div>
+        <div>
+            <p>Фамилия: @Html.EditorFor(model => model.FirstName)</p>
+        </div>
+        <div>
+            <p>Почтовый индекс: @Html.EditorFor(model => model.PostalCode)</p>
+        </div>
+        <div>
+            <p>Адрес: @Html.EditorFor(model => model.Address)</p>
+        </div>
+
+        <div>
+            <div>
+                <input type="submit" value="Сохранить" />
+            </div>
+        </div>
+    </div>
+}

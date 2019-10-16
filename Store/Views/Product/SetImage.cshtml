@@ -1,0 +1,19 @@
+﻿
+
+@{
+    ViewBag.Title = "Добавить изображение к продукту";
+    Layout = Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавление изображения (Этап 3 из 3) </h2>
+
+@using (Html.BeginForm("SetImage", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+<fieldset>
+    <legend>Добавить изображение</legend>
+    <input type="file" name="upload" /><br>
+    <input type="submit" value="Загрузить" />
+</fieldset>
+}
+

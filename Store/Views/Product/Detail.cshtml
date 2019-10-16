@@ -1,0 +1,39 @@
+﻿@model Store.Models.Product
+
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = ViewBag.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@if (User.IsInRole("admin")) { 
+<ul style="float:right; width:70px">
+    <li><a href="/Product/Edit/@Model.Id">Изменить</a></li>
+    <li><a href="/Product/Delete/@Model.Id">Удалить</a></li>
+</ul>
+}
+<div style="width:680px" class="product_box">
+
+    <img style="margin:10px;" src="@Model.PictureURL" />
+    <h1>
+        @Model.Category.CategoryName
+        @Model.Model
+        @*@Model.Brand.BrandName*@
+        @* @Model.Series *@
+
+
+    </h1>
+
+    @if (!String.IsNullOrEmpty(Model.Description))
+    {<div><strong>Описание: </strong>@Model.Description</div>}
+    <p></p>
+    <div style="text-align:right"><strong>Осталось на складе товара:</strong> @Model.Left </div>
+
+
+    <p class="product_price" style="text-align:right">@Model.Price ₱</p>
+    <a style="float:left" href="javascript:history.go(-1)">Назад</a>
+    <a style="float:right;margin-left:40px;" href='@Url.Action("Add", "Basket", new { id = Model.Id, userid = User.Identity.GetUserId() })' class="addtocart">В корзину</a>
+    @*<p style="float:right"><strong>Дата добавления:</strong> @Model.DateAdded</p>*@
+</div>
+

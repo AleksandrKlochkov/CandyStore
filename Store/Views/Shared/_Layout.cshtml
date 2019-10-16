@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <script src="~/Scripts/jquery-3.3.1.js" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/templatemo_style.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/ddsmoothmenu.css")" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <div id="templatemo_body_wrapper">
+        <div id="templatemo_wrapper">
+
+            @*<div id="templatemo_header">
+              
+              
+            </div>*@ <!-- END of templatemo_header -->
+
+            <div id="templatemo_menubar">
+                <div id="site_title">
+                    <a href="/"><img class="logo" src="~/Content/images/pirozhenoe.png" alt="Alternate Text" />  <h1 class="logo-text"> Магазин кондитерских изделий</h1>  </a>
+                </div>
+                <div id="top_nav" class="ddsmoothmenu">
+                    <ul>
+                        <li><a href='/Home/Index'>Главная</a></li>
+                        <li><a href='/Home/AboutUs'>О Магазине</a></li>
+                        @*<li><a href='/Home/ContactUs'>Свяжитесь с нами</a></li>*@
+                        <li>
+                            @if (User.IsInRole("admin"))
+                            {<a href="/Account/Admin">Вход в админ панель</a>}
+                        </li>
+                    </ul>
+                    <br style="clear: left" />
+                </div> <!-- end of ddsmoothmenu -->
+                <div id="templatemo_search">
+                    <form action="/Home/Search" method="get">
+                        <input placeholder="Поиск" type="text" value="" name="keyword" id="keyword" title="Поиск" onfocus="clearText(this)" onblur="clearText(this)" class="txt_field" />
+                        <input type="submit" value="" id="searchbutton" title="Search" class="sub_btn" />
+                    </form>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div> <!-- END of templatemo_menubar -->
+
+            <div id="templatemo_main">
+                <div id="sidebar" class="float_l">
+                    <div class="sidebar_box">
+                        <span class="bottom"></span>
+                        <h3>Категории</h3>
+                        <div class="content">
+                            <ul class="sidebar_list">
+                                <li class="first"><a href="/Home/Index/1">Конфеты</a></li>
+                                <li><a href="/Home/Index/2">Батончики и мюсли</a></li>
+                                <li><a href="/Home/Index/3">Печенье</a></li>
+                                <li><a href="/Home/Index/4">Вафли</a></li>
+                                <li><a href="/Home/Index/5">Торты</a></li>
+                                <li><a href="/Home/Index/6">Пирожные</a></li>
+                                <li><a href="/Home/Index/7">Круасаны</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="sidebar_box">
+                        <span class="bottom"></span>
+                        <h3>Сортировка</h3>
+                        <div class="content">
+                            <ul class="sidebar_list">
+                                <li class="first"><a href="?sort=price_asc">По цене (возрастанию)</a></li>
+                                <li><a href="?sort=price_desc">По цене (убыванию)</a></li>
+                                <li><a href="?sort=newest">Сначала новые</a></li>
+                                <li class="last"><a href="?sort=oldest">Сначала старые</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div id="content" class="float_r">
+
+                    @RenderBody()
+
+                </div>
+                <div class="cleaner"></div>
+            </div> <!-- END of templatemo_main -->
+
+            <div id="templatemo_footer">
+                <p>
+                    <a href="/Home/Index">Главная</a> | <a href="/Home/AboutUs">О Магазине</a> @*| <a href="/Home/ContactUs">Свяжитесь с нами</a>*@
+                </p>
+
+                Copyright © @DateTime.Now.Year 
+            </div> <!-- END of templatemo_footer -->
+
+        </div> <!-- END of templatemo_wrapper -->
+    </div> <!-- END of templatemo_body_wrapper -->
+
+    <script>
+        $(document).ready(function () {
+            $('#searchbutton').click(function () {
+                if ($('#keyword').val() == "") {
+                    alert('Вы ничего не ввели в поле поиска!');
+                    return false;
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>

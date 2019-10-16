@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Store.Models.Basket>
+
+@{
+    ViewBag.Title = "Корзина";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Корзина</h2>
+
+<table class="table">
+    @if (Model.Any())
+    {
+        <tr>
+            <th>
+                Изображение
+            </th>
+            <th>
+                Товар
+            </th>
+            <th width="20px">
+                Количество
+            </th>
+            <th>
+                Стоимость
+            </th>
+            <th>
+                Дата добавления
+            </th>
+            <th></th>
+        </tr>
+    }
+    else
+    {
+        <h3>Ваша корзина пуста!</h3>
+    }
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img width="100" src="@item.Product.PictureURL" />
+            </td>
+            <td>
+                @item.Product.Category.CategoryName @item.Product.Brand.BrandName @item.Product.Model
+            </td>
+            <td>
+                <input type="number" size="5" value="@item.AmountOfProduct" max="99" min="1" />
+            </td>
+            <td>@item.Product.Price ₱</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeOrder)
+            </td>
+            <td>
+                <a href='@Url.Action("Detail", "Product", new { id = item.ProductId })'>Посмотреть</a>
+                <a href='@Url.Action("Delete", "Basket", new { id = item.Id, userid = item.AccountId })'>Удалить</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<a style="float:left" href="@Request.UrlReferrer.ToString()">Назад</a>   @if (Model.Any()) {<input style="float:right" type="button" value="Оплатить" />}
